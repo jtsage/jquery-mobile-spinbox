@@ -84,10 +84,6 @@
 			this.d.wrap.removeClass("ui-disabled");
 			this.disabled = false;
 		},
-		_setOption: function() {
-			$.Widget.prototype._setOption.apply( this, arguments );
-			this.refresh();
-		}
 	});
 	  
 	// Degrade any inputs to text inputs, suppress standard UI functions.
