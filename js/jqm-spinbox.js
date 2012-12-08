@@ -51,8 +51,10 @@
 				e.preventDefault();
 				if ( !w.disabled ) {
 					tmp = parseInt(w.d.input.val(),10) + 1;
-					if ( tmp <= o.dmax ) { w.d.input.val(tmp); }
-                        		w.d.input.trigger('change');
+					if ( tmp <= o.dmax ) { 
+						w.d.input.val(tmp);
+						w.d.input.trigger('change');
+					}
 				}
 			});
 			
@@ -60,8 +62,10 @@
 				e.preventDefault();
 				if ( !w.disabled ) {
 					tmp = parseInt(w.d.input.val(),10) - 1;
-					if ( tmp >= o.dmin ) { w.d.input.val(tmp); }
-                       			w.d.input.trigger('change');
+					if ( tmp >= o.dmin ) { 
+						w.d.input.val(tmp);
+						w.d.input.trigger('change');
+					}
 				}
 			});
 			
@@ -70,8 +74,10 @@
 					e.preventDefault();
 					if ( !w.disabled ) {
 						tmp = parseInt(w.d.input.val(),10) + ((d<0)?-1:1);
-						if ( tmp >= o.dmin && tmp <= o.dmax ) { w.d.input.val(tmp); }
-                       				w.d.input.trigger('change');
+						if ( tmp >= o.dmin && tmp <= o.dmax ) { 
+							w.d.input.val(tmp); 
+							w.d.input.trigger('change');
+						}
 					}
 				});
 			}
