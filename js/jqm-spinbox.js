@@ -12,6 +12,7 @@
 			dmin: false,
 			dmax: false,
 			theme: false,
+			initSelector: "input[data-role='spinbox']",
 			clickEvent: 'vclick'
 		},
 		_create: function() {
@@ -75,29 +76,18 @@
 		disable: function(){
 			// Disable the element
 			this.d.input.attr("disabled",true);
-			this.d.wrap.addClass("ui-disabled").blur();
+			this.d.input.addClass("ui-disabled").blur();
 			this.disabled = true;
 		},
 		enable: function(){
 			// Enable the element
 			this.d.input.attr("disabled", false);
-			this.d.wrap.removeClass("ui-disabled");
+			this.d.input.removeClass("ui-disabled");
 			this.disabled = false;
 		},
 	});
 	  
-	// Degrade any inputs to text inputs, suppress standard UI functions.
-	$( document ).on( "pagebeforecreate", function( e ) {
-		$( ":jqmData(role='spinbox')", e.target ).each(function() {
-			$(this).prop('type', 'text');
-		});
-	});
-	// Automatically bind to data-role='datebox' items.
-	$( document ).on( "pagecreate create", function( e ){
-		$( ":jqmData(role='spinbox')", e.target ).each(function() {
-			if ( typeof($(this).data('spinbox')) === "undefined" ) {
-				$(this).spinbox();
-			}
-		});
+	$( document ).bind( "pagecreate create", function( e ){
+		$.mobile.spinbox.prototype.enhanceWithin( e.target, true );
 	});
 })( jQuery );
