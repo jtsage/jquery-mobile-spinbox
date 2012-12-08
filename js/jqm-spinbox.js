@@ -52,6 +52,7 @@
 				if ( !w.disabled ) {
 					tmp = parseInt(w.d.input.val(),10) + 1;
 					if ( tmp <= o.dmax ) { w.d.input.val(tmp); }
+                        		w.d.input.trigger('change');
 				}
 			});
 			
@@ -60,6 +61,7 @@
 				if ( !w.disabled ) {
 					tmp = parseInt(w.d.input.val(),10) - 1;
 					if ( tmp >= o.dmin ) { w.d.input.val(tmp); }
+                       			w.d.input.trigger('change');
 				}
 			});
 			
@@ -69,6 +71,7 @@
 					if ( !w.disabled ) {
 						tmp = parseInt(w.d.input.val(),10) + ((d<0)?-1:1);
 						if ( tmp >= o.dmin && tmp <= o.dmax ) { w.d.input.val(tmp); }
+                       				w.d.input.trigger('change');
 					}
 				});
 			}
@@ -84,7 +87,7 @@
 			this.d.input.attr("disabled", false);
 			this.d.input.removeClass("ui-disabled");
 			this.disabled = false;
-		},
+		}
 	});
 	  
 	$( document ).bind( "pagecreate create", function( e ){
