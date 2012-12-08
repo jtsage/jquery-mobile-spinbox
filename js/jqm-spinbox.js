@@ -20,10 +20,19 @@
 				o = $.extend(this.options, this.element.jqmData('options')),
 				d = {
 					input: this.element,
-					wrap: this.element.wrap('<div style="display:inline; white-space:nowrap"></div>').parent()
+					wrap: this.element.parent()
 				};
 				
 			w.d = d;
+			
+			if ( w.d.input.jqmData('mini') === true ) {
+				w.d.input.addClass('ui-mini');
+			}
+			
+			w.d.wrap
+				.css({'display':'inline','whiteSpace':'nowrap','border':'none'})
+				.removeClass('ui-input-text ui-shadow-inset ui-btn-shadow')
+				.addClass('ui-controlgroup ui-controlgroup-horizontal ui-controlgroup-controls');
 			
 			if ( o.theme === false ) {
 				o.theme = $(this).closest('[data-theme]').attr('data-theme');
@@ -36,17 +45,17 @@
 			if ( o.dmax === false ) { o.dmax = ( typeof w.d.input.attr('max') !== 'undefined' ) ? parseInt(w.d.input.attr('max'),10) : Number.MAX_VALUE; }
 			
 			w.d.up = $('<div>')
-				.buttonMarkup({icon: 'plus', theme: o.theme, iconpos: 'notext', corners:false, shadow:true, inline:true})
-				.addClass('ui-corner-right')
+				.buttonMarkup({icon: 'plus', theme: o.theme, iconpos: 'notext', corners:true, shadow:true, inline:true})
 				.css({'marginLeft':'0px', 'marginBottom':'0px', 'marginTop':'0px', 'paddingLeft':'.4em'})
 				.appendTo(w.d.wrap);
 				
 			w.d.down = $('<div>')
-				.buttonMarkup({icon: 'minus', theme: o.theme, iconpos: 'notext', corners:false, shadow:true, inline:true})
-				.addClass('ui-corner-left')
+				.buttonMarkup({icon: 'minus', theme: o.theme, iconpos: 'notext', corners:true, shadow:true, inline:true})
 				.css({'marginRight':'0px', 'marginBottom':'0px', 'marginTop':'0px', 'paddingRight':'.4em'})
 				.prependTo(w.d.wrap);
 				
+			$.mobile.behaviors.addFirstLastClasses._addFirstLastClasses(w.d.wrap.find('.ui-btn'), w.d.wrap.find('.ui-btn'), true);
+			
 			w.d.up.on(o.clickEvent, function(e) {
 				e.preventDefault();
 				if ( !w.disabled ) {
