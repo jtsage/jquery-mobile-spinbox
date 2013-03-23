@@ -36,7 +36,11 @@
 				
 			if ( o.type === "horizontal" ) { 
 				w.d.wrap.css({'display':'inline', 'whiteSpace':'nowrap', 'border':'none'}); 
-				w.d.input.addClass('ui-slider-input');
+				if ( w.d.input.jqmData('mini') === true ) {
+					w.d.input.css({'width':'30px'});
+				} else {
+					w.d.input.css({'width':'40px'});
+				}
 			} else {
 				w.d.input.css({'width':'auto'});
 				w.d.wrap.css({'width':'auto','display':'inline-block'});
