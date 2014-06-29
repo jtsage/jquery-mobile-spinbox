@@ -38,6 +38,7 @@
 				
 			if ( o.type === "horizontal" ) { 
 				w.d.wrap.css({'display':'inline', 'whiteSpace':'nowrap', 'border':'none'}); 
+				w.d.input.css({'display':'inline-block'});
 				if ( w.d.input.jqmData('mini') === true ) {
 					w.d.input.css({'width':'30px'});
 				} else {
