@@ -66,14 +66,21 @@
 			w.d.down = $('<div>')
 				.buttonMarkup({icon: 'minus', theme: o.theme, iconpos: 'notext', corners:true, shadow:true, inline:o.type==="horizontal"})
 				.css({'marginRight':'0px', 'marginBottom':'0px', 'marginTop':'0px', 'paddingRight':o.type==="horizontal"?'.4em':'0px'});
-				
+			
+			if ( o.type!=="horizontal" ) {
+				w.d.down.css({'width': 'auto'});
+				w.d.up.css({'width': 'auto'});
+			}
+			
+			$.mobile.behaviors.addFirstLastClasses._removeFirstLastClasses(w.d.wrap.find('.ui-btn'), w.d.wrap.find('.ui-btn'), true);
+			
 			if ( o.type === 'horizontal' ) {
 				w.d.down.prependTo(w.d.wrap); w.d.up.appendTo(w.d.wrap);
+				w.d.down.addClass('ui-last-child'); w.d.up.addClass('ui-first-child');
 			} else {
 				w.d.up.prependTo(w.d.wrap); w.d.down.appendTo(w.d.wrap);
+				w.d.up.addClass('ui-last-child'); w.d.down.addClass('ui-first-child');
 			}
-				
-			$.mobile.behaviors.addFirstLastClasses._addFirstLastClasses(w.d.wrap.find('.ui-btn'), w.d.wrap.find('.ui-btn'), true);
 			
 			w.d.up.on(o.clickEvent, function(e) {
 				e.preventDefault();
@@ -125,6 +132,11 @@
 	});
 	  
 	$( document ).bind( "pagecreate create", function( e ){
-		$.mobile.spinbox.prototype.enhanceWithin( e.target, true );
+		$( ":jqmData(role='spinbox')", e.target ).each(function() {
+			var defed = typeof ($(this).data('mobile-spinbox'));
+			if ( defed === "undefined" ) {
+				$(this).spinbox();
+			}
+		});
 	});
 })( jQuery );
