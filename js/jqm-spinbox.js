@@ -18,15 +18,50 @@
 			clickEvent: 'vclick',
 			type: 'horizontal', // or vertical
 		},
+		_offset: function(obj, direction) {
+			var w = this,
+				o = this.options;
+				
+			if ( !w.disabled ) {
+				if ( direction < 1 ) {
+					tmp = parseInt(w.d.input.val(),10) - o.step;
+					if ( tmp >= o.dmin ) { 
+						w.d.input.val(tmp);
+						w.d.input.trigger('change');
+					}
+				} else {
+					tmp = parseInt(w.d.input.val(),10) + o.step;
+					if ( tmp <= o.dmax ) { 
+						w.d.input.val(tmp);
+						w.d.input.trigger('change');
+					}
+				}
+			}
+		},
 		_create: function() {
 			var w = this, tmp,
 				o = $.extend(this.options, this.element.jqmData('options')),
 				d = {
 					input: this.element,
 					wrap: this.element.parent()
+				},
+				touch = ( typeof window.ontouchstart !== 'undefined' ),
+				drag =  {
+					eStart : (touch ? 'touchstart' : 'mousedown')+'.spinbox',
+					eMove  : (touch ? 'touchmove' : 'mousemove')+'.spinbox',
+					eEnd   : (touch ? 'touchend' : 'mouseup')+'.spinbox',
+					eEndA  : (touch ? 'mouseup.spinbox touchend.spinbox touchcancel.spinbox touchmove.spinbox' : 'mouseup.spinbox'),
+					move   : false,
+					start  : false,
+					end    : false,
+					pos    : false,
+					target : false,
+					delta  : false,
+					tmp    : false
 				};
 				
 			w.d = d;
+			w.g = drag;
 			
 			if ( w.d.input.jqmData('mini') === true ) {
 				w.d.input.addClass('ui-mini');
@@ -84,24 +119,12 @@
 			
 			w.d.up.on(o.clickEvent, function(e) {
 				e.preventDefault();
-				if ( !w.disabled ) {
-					tmp = parseInt(w.d.input.val(),10) + o.step;
-					if ( tmp <= o.dmax ) { 
-						w.d.input.val(tmp);
-						w.d.input.trigger('change');
-					}
-				}
+				w._offset(e.currentTarget, 1);
 			});
 			
 			w.d.down.on(o.clickEvent, function(e) {
 				e.preventDefault();
-				if ( !w.disabled ) {
-					tmp = parseInt(w.d.input.val(),10) - o.step;
-					if ( tmp >= o.dmin ) { 
-						w.d.input.val(tmp);
-						w.d.input.trigger('change');
-					}
-				}
+				w._offset(e.currentTarget, -1);
 			});
 			
 			if ( typeof $.event.special.mousewheel !== 'undefined' ) { // Mousewheel operation, if plugin is loaded
