@@ -11,6 +11,7 @@
 			// All widget options, including some internal runtime details
 			dmin: false,
 			dmax: false,
+			step: false,
 			theme: false,
 			initSelector: "input[data-role='spinbox']",
 			clickEvent: 'vclick',
@@ -52,9 +53,9 @@
 				if ( typeof o.theme === 'undefined' ) { o.theme = 'c'; }
 			}
 			
-			
 			if ( o.dmin === false ) { o.dmin = ( typeof w.d.input.attr('min') !== 'undefined' ) ? parseInt(w.d.input.attr('min'),10) : Number.MAX_VALUE * -1; }
 			if ( o.dmax === false ) { o.dmax = ( typeof w.d.input.attr('max') !== 'undefined' ) ? parseInt(w.d.input.attr('max'),10) : Number.MAX_VALUE; }
+			if ( o.step === false) { o.step = (typeof w.d.input.attr('step') !== 'undefined' ) ? parseInt(w.d.input.attr('step'),10) : 1; }
 			
 			w.d.up = $('<div>')
 				.buttonMarkup({icon: 'plus', theme: o.theme, iconpos: 'notext', corners:true, shadow:true, inline:o.type==="horizontal"})
@@ -75,7 +76,7 @@
 			w.d.up.on(o.clickEvent, function(e) {
 				e.preventDefault();
 				if ( !w.disabled ) {
-					tmp = parseInt(w.d.input.val(),10) + 1;
+					tmp = parseInt(w.d.input.val(),10) + o.step;
 					if ( tmp <= o.dmax ) { 
 						w.d.input.val(tmp);
 						w.d.input.trigger('change');
@@ -86,7 +87,7 @@
 			w.d.down.on(o.clickEvent, function(e) {
 				e.preventDefault();
 				if ( !w.disabled ) {
-					tmp = parseInt(w.d.input.val(),10) - 1;
+					tmp = parseInt(w.d.input.val(),10) - o.step;
 					if ( tmp >= o.dmin ) { 
 						w.d.input.val(tmp);
 						w.d.input.trigger('change');
