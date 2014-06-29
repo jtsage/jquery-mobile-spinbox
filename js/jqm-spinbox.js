@@ -13,6 +13,7 @@
 			dmax: false,
 			step: false,
 			theme: false,
+			version: '1.4.0-2014062900',
 			initSelector: "input[data-role='spinbox']",
 			clickEvent: 'vclick',
 			type: 'horizontal', // or vertical
