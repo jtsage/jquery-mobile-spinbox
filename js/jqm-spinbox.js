@@ -13,10 +13,24 @@
 			dmax: false,
 			step: false,
 			theme: false,
+			repButton: true,
 			version: '1.4.0-2014062900',
 			initSelector: "input[data-role='spinbox']",
 			clickEvent: 'vclick',
 			type: 'horizontal', // or vertical
+		},
+		_sbox_run: function () {
+			var w = this,
+				timer = 150;
+				
+			if ( w.g.cnt > 10 ) { timer = 100; }
+			if ( w.g.cnt > 30 ) { timer = 50; }
+			if ( w.g.cnt > 60 ) { timer = 20; }
+			
+			w.g.didRun = true;
+			w._offset(this, w.g.delta);
+			w.g.cnt++;
+			w.runButton = setTimeout(function() {w._sbox_run();}, timer);
 		},
 		_offset: function(obj, direction) {
 			var w = this,
@@ -57,7 +71,8 @@
 					pos    : false,
 					target : false,
 					delta  : false,
-					tmp    : false
+					tmp    : false,
+					cnt    : 0
 				};
 				
 			w.d = d;
@@ -117,15 +132,50 @@
 				w.d.up.addClass('ui-last-child'); w.d.down.addClass('ui-first-child');
 			}
 			
-			w.d.up.on(o.clickEvent, function(e) {
-				e.preventDefault();
-				w._offset(e.currentTarget, 1);
-			});
-			
-			w.d.down.on(o.clickEvent, function(e) {
-				e.preventDefault();
-				w._offset(e.currentTarget, -1);
-			});
+			if ( o.repButton === false ) {
+				w.d.up.on(o.clickEvent, function(e) { e.preventDefault(); w._offset(e.currentTarget, 1); });
+				w.d.down.on(o.clickEvent, function(e) { e.preventDefault(); w._offset(e.currentTarget, -1); });
+			} else {
+				console.log(w.g);
+				w.d.up.on(w.g.eStart, function(e) {
+					w.d.input.blur();
+					w._offset(e.currentTarget, 1);
+					w.g.move = true;
+					w.g.cnt = 0;
+					w.g.delta = 1;
+					if ( !w.runButton ) {
+						w.g.target = e.currentTarget;
+						w.runButton = setTimeout(function() {w._sbox_run();}, 500);
+					}
+				});
+				w.d.down.on(w.g.eStart, function(e) {
+					w.d.input.blur();
+					w._offset(e.currentTarget, 1);
+					w.g.move = true;
+					w.g.cnt = 0;
+					w.g.delta = -1;
+					if ( !w.runButton ) {
+						w.g.target = e.currentTarget;
+						w.runButton = setTimeout(function() {w._sbox_run();}, 500);
+					}
+				});
+				w.d.up.on(w.g.eEndA, function(e) {
+					if ( w.g.move ) {
+						e.preventDefault();
+						clearTimeout(w.runButton);
+						w.runButton = false;
+						w.g.move = false;
+					}
+				});
+				w.d.down.on(w.g.eEndA, function(e) {
+					if ( w.g.move ) {
+						e.preventDefault();
+						clearTimeout(w.runButton);
+						w.runButton = false;
+						w.g.move = false;
+					}
+				});
+			}
 			
 			if ( typeof $.event.special.mousewheel !== 'undefined' ) { // Mousewheel operation, if plugin is loaded
 				w.d.input.on('mousewheel', function(e,d) {
