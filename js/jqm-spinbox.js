@@ -14,7 +14,7 @@
 			step: false,
 			theme: false,
 			repButton: true,
-			version: '1.4.0-2014062900',
+			version: '1.4.3-2014080200',
 			initSelector: "input[data-role='spinbox']",
 			clickEvent: 'vclick',
 			type: 'horizontal', // or vertical
@@ -150,7 +150,7 @@
 				});
 				w.d.down.on(w.g.eStart, function(e) {
 					w.d.input.blur();
-					w._offset(e.currentTarget, 1);
+					w._offset(e.currentTarget, -1);
 					w.g.move = true;
 					w.g.cnt = 0;
 					w.g.delta = -1;
