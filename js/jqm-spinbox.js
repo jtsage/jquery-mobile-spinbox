@@ -102,7 +102,7 @@
 			
 			if ( o.theme === false ) {
 				o.theme = $(this).closest('[data-theme]').attr('data-theme');
-				if ( typeof o.theme === 'undefined' ) { o.theme = 'c'; }
+				if ( typeof o.theme === 'undefined' ) { o.theme = 'a'; }
 			}
 			
 			if ( o.dmin === false ) { o.dmin = ( typeof w.d.input.attr('min') !== 'undefined' ) ? parseInt(w.d.input.attr('min'),10) : Number.MAX_VALUE * -1; }
