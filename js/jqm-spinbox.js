@@ -53,11 +53,11 @@
 			}
 		},
 		_create: function() {
-			var w = this, tmp,
+			var w = this, tmp, mini,
 				o = $.extend(this.options, this.element.jqmData('options')),
 				d = {
 					input: this.element,
-					wrap: this.element.parent()
+					inputWrap: this.element.parent()
 				},
 				touch = ( typeof window.ontouchstart !== 'undefined' ),
 				drag =  {
@@ -78,28 +78,6 @@
 			w.d = d;
 			w.g = drag;
 			
-			if ( w.d.input.jqmData('mini') === true ) {
-				w.d.input.addClass('ui-mini');
-			}
-			
-			w.d.wrap
-				.removeClass('ui-input-text ui-shadow-inset ui-btn-shadow')
-				.addClass('ui-controlgroup ui-controlgroup-'+o.type);
-				
-			if ( o.type === "horizontal" ) { 
-				w.d.wrap.css({'display':'inline', 'whiteSpace':'nowrap', 'border':'none'}); 
-				w.d.input.css({'display':'inline-block'});
-				if ( w.d.input.jqmData('mini') === true ) {
-					w.d.input.css({'width':'30px'});
-				} else {
-					w.d.input.css({'width':'40px'});
-				}
-			} else {
-				w.d.input.css({'width':'auto'});
-				w.d.wrap.css({'width':'auto','display':'inline-block'});
-			}
-			w.d.input.css({'textAlign':'center'});
-			
 			if ( o.theme === false ) {
 				o.theme = $(this).closest('[data-theme]').attr('data-theme');
 				if ( typeof o.theme === 'undefined' ) { o.theme = 'a'; }
@@ -109,20 +87,25 @@
 			if ( o.dmax === false ) { o.dmax = ( typeof w.d.input.attr('max') !== 'undefined' ) ? parseInt(w.d.input.attr('max'),10) : Number.MAX_VALUE; }
 			if ( o.step === false) { o.step = (typeof w.d.input.attr('step') !== 'undefined' ) ? parseInt(w.d.input.attr('step'),10) : 1; }
 			
-			w.d.up = $('<div>')
-				.buttonMarkup({icon: 'plus', theme: o.theme, iconpos: 'notext', corners:true, shadow:true, inline:o.type==="horizontal"})
-				.css({'marginLeft':'0px', 'marginBottom':'0px', 'marginTop':'0px', 'paddingLeft':o.type==="horizontal"});
-				
-			w.d.down = $('<div>')
-				.buttonMarkup({icon: 'minus', theme: o.theme, iconpos: 'notext', corners:true, shadow:true, inline:o.type==="horizontal"})
-				.css({'marginRight':'0px', 'marginBottom':'0px', 'marginTop':'0px', 'paddingRight':o.type==="horizontal"?'.4em':'0px'});
+			mini = ( w.d.input.jqmData('mini') === true );
 			
-			if ( o.type!=="horizontal" ) {
-				w.d.down.css({'width': 'auto'});
-				w.d.up.css({'width': 'auto'});
+			w.d.wrap = $('<div>', {'data-role': 'controlgroup', 'data-type': o.type, 'data-mini': mini, 'data-theme': o.theme})
+				.insertBefore(w.d.inputWrap)
+				.append(w.d.inputWrap);
+			
+			w.d.inputWrap.addClass('ui-btn');
+			w.d.input.css({'textAlign': 'center'});
+			
+			if ( o.type === "horizontal" ) {
+				w.d.inputWrap.css({'padding': mini ? '1px 0' : '4px 0 3px'});
+				w.d.input.css({'width': mini ? '40px' : '50px'});
+			} else {
+				w.d.wrap.css({'width': 'auto'});
+				w.d.inputWrap.css({'padding': 0});
 			}
 			
-			$.mobile.behaviors.addFirstLastClasses._removeFirstLastClasses(w.d.wrap.find('.ui-btn'), w.d.wrap.find('.ui-btn'), true);
+			w.d.up = $('<div>').html('&nbsp;').buttonMarkup({icon: 'plus', iconpos: 'notext'});
+			w.d.down = $('<div>').html('&nbsp;').buttonMarkup({icon: 'minus', iconpos: 'notext'});
 			
 			if ( o.type === 'horizontal' ) {
 				w.d.down.prependTo(w.d.wrap); w.d.up.appendTo(w.d.wrap);
@@ -131,6 +114,8 @@
 				w.d.up.prependTo(w.d.wrap); w.d.down.appendTo(w.d.wrap);
 				w.d.up.addClass('ui-last-child'); w.d.down.addClass('ui-first-child');
 			}
+			
+			w.d.wrap.controlgroup();
 			
 			if ( o.repButton === false ) {
 				w.d.up.on(o.clickEvent, function(e) { e.preventDefault(); w._offset(e.currentTarget, 1); });
