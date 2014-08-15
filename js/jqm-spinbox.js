@@ -104,8 +104,8 @@
 				w.d.inputWrap.css({'padding': 0});
 			}
 			
-			w.d.up = $('<div>').html('&nbsp;').buttonMarkup({icon: 'plus', iconpos: 'notext'});
-			w.d.down = $('<div>').html('&nbsp;').buttonMarkup({icon: 'minus', iconpos: 'notext'});
+			w.d.up = $('<div>', {'class': 'ui-btn ui-icon-plus ui-btn-icon-notext'}).html('&nbsp;');
+			w.d.down = $('<div>', {'class': 'ui-btn ui-icon-minus ui-btn-icon-notext'}).html('&nbsp;');
 			
 			if ( o.type === 'horizontal' ) {
 				w.d.down.prependTo(w.d.wrap); w.d.up.appendTo(w.d.wrap);
