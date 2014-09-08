@@ -86,6 +86,10 @@
 					o.theme
 				);
 			
+			if ( w.d.input.prop( "disabled" ) ) {
+				o.disabled = true;
+			}
+			
 			if ( o.dmin === false ) { 
 				o.dmin = ( typeof w.d.input.attr( "min" ) !== "undefined" ) ?
 					parseInt( w.d.input.attr( "min" ), 10 ) :
