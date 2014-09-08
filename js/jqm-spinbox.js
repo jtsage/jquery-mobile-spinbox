@@ -81,10 +81,21 @@
 			w.d = d;
 			w.g = drag;
 			
+<<<<<<< HEAD
 			o.theme = ( ( o.theme === false ) ?
 					$.mobile.getInheritedTheme( this.element, "a" ) :
 					o.theme
 				);
+=======
+			if ( w.d.input.prop('disabled') ) {
+				w.disabled = true;
+			}
+			
+			if ( o.theme === false ) {
+				o.theme = $(this).closest('[data-theme]').attr('data-theme');
+				if ( typeof o.theme === 'undefined' ) { o.theme = 'a'; }
+			}
+>>>>>>> pr/11
 			
 			if ( o.dmin === false ) { 
 				o.dmin = ( typeof w.d.input.attr( "min" ) !== "undefined" ) ?
@@ -208,6 +219,11 @@
 					w._offset( e.currentTarget, ( d < 0 ? -1 : 1 ) );
 				});
 			}
+			
+			if ( w.disabled ) {
+				w.disable();
+			}
+			
 		},
 		disable: function(){
 			// Disable the element
