@@ -177,14 +177,18 @@
 		},
 		disable: function(){
 			// Disable the element
-			this.d.input.attr("disabled",true);
-			this.d.input.addClass("ui-disabled").blur();
+			this.d.input.attr("disabled", true).blur();
+			this.d.inputWrap.addClass("ui-state-disabled");
+			this.d.down.addClass("ui-state-disabled");
+			this.d.up.addClass("ui-state-disabled");
 			this.disabled = true;
 		},
 		enable: function(){
 			// Enable the element
 			this.d.input.attr("disabled", false);
-			this.d.input.removeClass("ui-disabled");
+			this.d.inputWrap.removeClass("ui-state-disabled");
+			this.d.down.removeClass("ui-state-disabled");
+			this.d.up.removeClass("ui-state-disabled");
 			this.disabled = false;
 		}
 	});
