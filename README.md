@@ -12,7 +12,6 @@ The spinbox control is simple to use - just load the script after jQM, and set y
     <script type="text/javascript" src="PATH/TO/YOUR/COPY/OF/jquery.mousewheel.min.js"></script>
 
     <script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"></script>
-	
 
 A typical input:
 	
@@ -20,5 +19,3 @@ A typical input:
         <label for="spin">Input spinner</label>
         <input type="text" data-role="spinbox" name="spin" id="spin" value="60" min="0" max="100" />
     </div>
-
-  
