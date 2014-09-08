@@ -17,11 +17,11 @@
 	<link type="text/css" href="http://dev.jtsage.com/gpretty/prettify.css" rel="stylesheet" />
 </head>
 <body>
-<div data-role="page" data-theme="a" id="main"> 
+<div data-role="page">
 	<div data-role="header" data-position="fixed"> 
 		<h1>jQueryMobile - Spinbox Demo</h1>
 	</div>
-	<div data-role="content">
+	<div class="ui-content" role="main" >
 		<p>The spinbox control is simple to use - just load the script after jQM, and set your data-type="spinbox".  Initial input type can be whatever you want, nothing is changed - min/max are enforced with the buttons.</p>
 		<pre class="prettyprint">&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"&gt;&lt;/script&gt; 
 &lt;script type="text/javascript" src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"&gt;&lt;/script&gt;
@@ -30,7 +30,7 @@
 &lt;script type="text/javascript" src="PATH/TO/YOUR/COPY/OF/jquery.mousewheel.min.js">&lt;/script>
 
 &lt;script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"&gt;&lt;/script&gt;</pre>
-		<pre class="prettyprint">&lt;div data-role="fieldcontain"&gt;
+		<pre class="prettyprint">&lt;div class="ui-field-contain"&gt;
     &lt;label for="spin"&gt;Input spinner&lt;/label&gt;
     &lt;input type="text" data-role="spinbox" name="spin" id="spin" value="60" min="0" max="100" /&gt;
 &lt;/div&gt;</pre>
@@ -38,61 +38,61 @@
 		<p>Take a look at the stock datebox docs for how to use data-options - there is one available, "repButton" : BOOL - controls whether press-and-hold functionality is enabled (default: true)</p>
 
 		<h2>Standard Size</h2>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="aa1">Text Compare</label>
 			<input name="aa1" type="text" id="aa1"/>
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="slider-0">Slider Compare</label>
 			<input type="range" name="slider" id="slider-0" value="60" min="0" max="100" />
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="spin">Input Spinner (horizontal)</label>
 			<input type="text" data-role="spinbox" name="spin" id="spin" data-options='{"type":"horizontal"}' value="60" min="0" max="100" />
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="spin2">Input Spinner (vertical)</label>
 			<input type="text" data-role="spinbox" name="spin2" id="spin2" data-options='{"type":"vertical"}' value="60" min="0" max="100" />
 		</div>
 		
 		<h2>data-mini="true" Size</h2>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="aa2">Text Compare</label>
 			<input name="aa2" type="text" data-mini="true" id="aa2"/>
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="slider-2">Slider Compare</label>
 			<input type="range" name="slider" id="slider-2" data-mini="true" value="60" min="0" max="100" />
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="spin3">Input Spinner (horizontal)</label>
 			<input type="text" data-mini="true" data-role="spinbox" name="spin3" id="spin3" data-options='{"type":"horizontal"}' value="60" max="100" />
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="spin4">Input Spinner (vertical)</label>
 			<input type="text" data-mini="true" data-role="spinbox" name="spin4" id="spin4" data-options='{"type":"vertical"}' value="60" max="100" />
 		</div>
 		
 		<h2>With a Stepper</h2>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="aa3">Text Compare</label>
 			<input name="aa3" type="text" data-mini="true" id="aa3"/>
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="spin5">Input Spinner (horizontal)</label>
 			<input type="text" data-mini="true" data-role="spinbox" name="spin5" id="spin5" data-options='{"type":"horizontal"}' step="5" value="60" max="100" />
 		</div>
-		<div data-role="fieldcontain">
+		<div class="ui-field-contain">
 			<label for="spin6">Input Spinner (vertical)</label>
 			<input type="text" data-mini="true" data-role="spinbox" name="spin6" id="spin6" data-options='{"type":"vertical"}' step="5" value="60" max="100" />
 		</div>
 	</div>
 	<div data-role="footer" data-position="fixed">
 		<div data-role="controlgroup" data-mini="true" data-type="horizontal">
-			<a data-role="button" data-mini="true" data-theme="a" rel="external" href="https://github.com/jtsage/jquery-mobile-spinbox">GitHub Source</a>
-			<a data-role="button" data-mini="true" data-theme="a" rel="external" href="http://dev.jtsage.com/forums/">Support Forums</a>
-			<a data-role="button" data-mini="true" data-theme="a" rel="external" href="mailto:jtsage+spinbox@gmail.com">Contact</a>
-			<a data-role="button" data-mini="true" data-theme="a" rel="external" href="http://jquerymobile.com/">jQueryMobile Homepage</a>
+			<a class="ui-btn" rel="external" href="https://github.com/jtsage/jquery-mobile-spinbox">GitHub Source</a>
+			<a class="ui-btn" rel="external" href="http://dev.jtsage.com/forums/">Support Forums</a>
+			<a class="ui-btn" rel="external" href="mailto:jtsage+spinbox@gmail.com">Contact</a>
+			<a class="ui-btn" rel="external" href="http://jquerymobile.com/">jQueryMobile Homepage</a>
 		</div>
 	</div>
 </div>
