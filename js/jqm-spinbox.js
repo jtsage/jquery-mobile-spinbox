@@ -223,8 +223,8 @@
 			var dis = this.d,
 				cname = "ui-state-disabled";
 			
-			dis.input.attr( "disabled", true );
-			dis.input.addClass( cname ).blur();
+			dis.input.attr( "disabled", true ).blur();
+			dis.inputWrap.addClass( cname );
 			dis.up.addClass( cname );
 			dis.down.addClass( cname );
 			this.options.disabled = true;
@@ -235,7 +235,7 @@
 				cname = "ui-state-disabled";
 			
 			dis.input.attr( "disabled", false );
-			dis.input.removeClass( cname );
+			dis.inputWrap.removeClass( cname );
 			dis.up.removeClass( cname );
 			dis.down.removeClass( cname );
 			this.options.disabled = false;
