@@ -209,7 +209,7 @@
 				});
 			}
 			
-			if ( w.disabled ) {
+			if ( o.disabled ) {
 				w.disable();
 			}
 			
@@ -223,7 +223,7 @@
 			dis.input.addClass( cname ).blur();
 			dis.up.addClass( cname );
 			dis.down.addClass( cname );
-			this.disabled = true;
+			this.options.disabled = true;
 		},
 		enable: function(){
 			// Enable the element
@@ -234,7 +234,7 @@
 			dis.input.removeClass( cname );
 			dis.up.removeClass( cname );
 			dis.down.removeClass( cname );
-			this.disabled = false;
+			this.options.disabled = false;
 		}
 	});
 })( jQuery );
