@@ -78,6 +78,10 @@
 			w.d = d;
 			w.g = drag;
 			
+			if ( w.d.input.prop('disabled') ) {
+				w.disabled = true;
+			}
+			
 			if ( o.theme === false ) {
 				o.theme = $(this).closest('[data-theme]').attr('data-theme');
 				if ( typeof o.theme === 'undefined' ) { o.theme = 'a'; }
@@ -174,6 +178,11 @@
 					}
 				});
 			}
+			
+			if ( w.disabled ) {
+				w.disable();
+			}
+			
 		},
 		disable: function(){
 			// Disable the element
