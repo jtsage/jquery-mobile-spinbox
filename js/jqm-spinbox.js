@@ -86,6 +86,10 @@
 					o.theme
 				);
 			
+			if ( w.d.input.prop( "disabled" ) ) {
+				o.disabled = true;
+			}
+			
 			if ( o.dmin === false ) { 
 				o.dmin = ( typeof w.d.input.attr( "min" ) !== "undefined" ) ?
 					parseInt( w.d.input.attr( "min" ), 10 ) :
@@ -209,7 +213,7 @@
 				});
 			}
 			
-			if ( w.disabled ) {
+			if ( o.disabled ) {
 				w.disable();
 			}
 			
@@ -219,11 +223,11 @@
 			var dis = this.d,
 				cname = "ui-state-disabled";
 			
-			dis.input.attr( "disabled", true );
-			dis.input.addClass( cname ).blur();
+			dis.input.attr( "disabled", true ).blur();
+			dis.inputWrap.addClass( cname );
 			dis.up.addClass( cname );
 			dis.down.addClass( cname );
-			this.disabled = true;
+			this.options.disabled = true;
 		},
 		enable: function(){
 			// Enable the element
@@ -231,10 +235,10 @@
 				cname = "ui-state-disabled";
 			
 			dis.input.attr( "disabled", false );
-			dis.input.removeClass( cname );
+			dis.inputWrap.removeClass( cname );
 			dis.up.removeClass( cname );
 			dis.down.removeClass( cname );
-			this.disabled = false;
+			this.options.disabled = false;
 		}
 	});
 })( jQuery );
