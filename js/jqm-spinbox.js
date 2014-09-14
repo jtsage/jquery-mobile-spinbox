@@ -15,7 +15,7 @@
 			theme: false,
 			mini: null,
 			repButton: true,
-			version: "1.4.3-2014090800",
+			version: "1.4.4-2014091500",
 			initSelector: "input[data-role='spinbox']",
 			clickEvent: "vclick",
 			type: "horizontal", // or vertical
