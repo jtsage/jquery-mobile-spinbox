@@ -15,10 +15,19 @@
 			theme: false,
 			mini: null,
 			repButton: true,
-			version: "1.4.4-2014091500",
+			version: "1.4.4-2015092400",
 			initSelector: "input[data-role='spinbox']",
 			clickEvent: "vclick",
 			type: "horizontal", // or vertical
+		},
+		_decimalPlaces: function (num) {
+			var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+			if (!match) { return 0; }
+			return Math.max(
+				0,
+				(match[1] ? match[1].length : 0)
+				- (match[2] ? +match[2] : 0)
+			);
 		},
 		_sbox_run: function () {
 			var w = this,
@@ -40,12 +49,12 @@
 				
 			if ( !w.disabled ) {
 				if ( direction < 1 ) {
-					tmp = parseInt( w.d.input.val(), 10 ) - o.step;
+					tmp = (parseFloat( w.d.input.val() ) - o.step).toFixed(w.places);
 					if ( tmp >= o.dmin ) { 
 						w.d.input.val( tmp ).trigger( "change" );
 					}
 				} else {
-					tmp = parseInt( w.d.input.val(), 10 ) + o.step;
+					tmp = (parseFloat( w.d.input.val() ) + o.step).toFixed(w.places);
 					if ( tmp <= o.dmax ) { 
 						w.d.input.val( tmp ).trigger( "change" );
 					}
@@ -102,9 +111,10 @@
 			}
 			if ( o.step === false) {
 				o.step = ( typeof w.d.input.attr( "step") !== "undefined" ) ?
-					parseInt( w.d.input.attr( "step" ), 10 ) :
+					parseFloat( w.d.input.attr( "step" ) ) :
 					1;
-				}
+				w.places = w._decimalPlaces(o.step);
+			}
 			
 			o.mini = ( o.mini === null ? 
 				( w.d.input.data("mini") ? true : false ) :
